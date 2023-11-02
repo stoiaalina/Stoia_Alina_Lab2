@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Stoia_Alina_Lab2.Data;
 using Stoia_Alina_Lab2.Models;
 
-namespace Stoia_Alina_Lab2.Pages.Books
+namespace Stoia_Alina_Lab2.Pages.Authors
 {
     public class DetailsModel : PageModel
     {
@@ -19,23 +19,23 @@ namespace Stoia_Alina_Lab2.Pages.Books
             _context = context;
         }
 
-      public Book Book { get; set; } = default!; 
+      public Author Author { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Book == null)
+            if (id == null || _context.Author == null)
             {
                 return NotFound();
             }
 
-            var book = await _context.Book.Include(b=> b.Author).Include(b=> b.Publisher).FirstOrDefaultAsync(m => m.ID == id);
-            if (book == null)
+            var author = await _context.Author.FirstOrDefaultAsync(m => m.ID == id);
+            if (author == null)
             {
                 return NotFound();
             }
             else 
             {
-                Book = book;
+                Author = author;
             }
             return Page();
         }
