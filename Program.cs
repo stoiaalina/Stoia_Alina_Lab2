@@ -5,16 +5,17 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddRazorPages();
+
 builder.Services.AddDbContext<Stoia_Alina_Lab2Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Stoia_Alina_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Stoia_Alina_Lab2Context' not found.")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<LibraryIdentityContext>();
-builder.Services.AddDbContext<LibraryIdentityContext>(options => 
 
-options.UseSqlServer(builder.Configuration.GetConnectionString("Stoia_Alina_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Stoia_Alina_Lab2Context' not found."))); 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<LibraryIdentityContext>();
+builder.Services.AddDbContext<LibraryIdentityContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Stoia_Alina_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Stoia_Alina_Lab2Context' not found."))); 
 
 var app = builder.Build();
 
